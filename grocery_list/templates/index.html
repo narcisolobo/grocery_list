@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Grocery List</title>
+</head>
+<body>
+    <div class="container mt-3 mx-auto d-flex justify-content-between">
+        <div class="w-100 m-3">
+            <h1>Create User</h1>
+            <form action="/users/new" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Add User</button>
+                </div>
+            </form>
+            <ul class="list-group mt-3">
+                {% for user in users %}
+                <li class="list-group-item">{{ user.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="w-100 m-3">
+            <h1>Create Store</h1>
+            <form action="/stores/new" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Add Store</button>
+                </div>
+            </form>
+            <ul class="list-group mt-3">
+                {% for store in stores %}
+                <li class="list-group-item">{{ store.name }} created by: {{ store.creator.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="w-100 m-3">
+            <h1>Create Product</h1>
+            <form action="/products/new" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="description" id="description" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price:</label>
+                    <input type="number" step="0.01"  name="price" id="price" class="form-control">
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                </div>
+            </form>
+            <ul class="list-group mt-3">
+                {% for product in products %}
+                <li class="list-group-item">{{ product.name }} created by: {{ product.creator.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
